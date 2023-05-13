@@ -1,17 +1,36 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
     <nav className="flex gap-2">
-      <Link to="/">Консоль</Link>
-      <Link to="/rooms">Комнаты</Link>
-      <Link to="/expenses">Расходы</Link>
-      <Link
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+      >
+        Консоль
+      </NavLink>
+      <NavLink
+        className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+        to="/rooms"
+      >
+        Комнаты
+      </NavLink>
+      <NavLink
+        className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+        to="/expenses"
+      >
+        Расходы
+      </NavLink>
+      <NavLink
         to="/login"
-        className="ml-auto outline outline-blue-300 px-2 py-1 rounded"
+        className={({ isActive }) =>
+          `ml-auto outline outline-blue-300 px-2 py-1 rounded ${
+            isActive ? "text-blue-500" : ""
+          }`
+        }
       >
         Login
-      </Link>
+      </NavLink>
     </nav>
   );
 }
