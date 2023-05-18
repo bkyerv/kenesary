@@ -29,7 +29,7 @@ export async function addResident({
     {
       resident_name: residentName,
       moving_in: movingInDate,
-      room_number: roomNumber,
+      room_number: parseInt(roomNumber),
     },
   ]);
 

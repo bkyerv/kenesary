@@ -25,7 +25,7 @@ export default function Room() {
           Платежи
         </NavLink>
       </nav>
-      <h2 className="text-3xl font-bold">{params.id}</h2>
+      <h2 className="text-3xl font-bold">Комната №{params.id}</h2>
       <Outlet />
     </>
   );
