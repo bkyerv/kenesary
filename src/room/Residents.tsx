@@ -1,54 +1,30 @@
-const residents = [
-  {
-    id: "1",
-    name: "Иванов Иван Иванович",
-    intake_date: "2023-10-30",
-    active: true,
-  },
-  {
-    id: "2",
-    name: "Michale Johnson",
-    intake_date: "2023-03-12",
-    active: true,
-  },
-  {
-    id: "3",
-    name: "Vikram Singh",
-    intake_date: "2023-11-20",
-    active: false,
-  },
-  {
-    id: "4",
-    name: "Иванов Иван Иванович",
-    intake_date: "2023-10-30",
-    active: true,
-  },
-  {
-    id: "5",
-    name: "Michale Johnson",
-    intake_date: "2023-03-12",
-    active: false,
-  },
-  {
-    id: "6",
-    name: "Vikram Singh",
-    intake_date: "2023-11-20",
-    active: true,
-  },
-  {
-    id: "7",
-    name: "Иванов Иван Иванович",
-    intake_date: "2023-10-30",
-    active: false,
-  },
-];
+import { ActionFunctionArgs, Link, useLoaderData } from "react-router-dom";
+import type { LoaderFunctionArgs } from "react-router-dom";
+import { supabase } from "../supabase/supabaseClient";
+import { getResidents } from "../api/resident";
+import { requireAuth } from "../utils/requireAuth";
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  return null;
+}
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  await requireAuth();
+  const data = await getResidents(params.id as string);
+  console.log(data);
+  return data;
+}
+
 export default function Residents() {
+  const residents = useLoaderData() as Awaited<ReturnType<typeof loader>>;
   return (
     <div className="text-sm p-4">
       <div className="text-right mt-2">
-        <button className="bg-blue-500 text-blue-50 px-2 py-1 rounded">
-          + Добавить
-        </button>
+        <Link to="../new-resident">
+          <button className="bg-blue-500 text-blue-50 px-2 py-1 rounded">
+            + Добавить
+          </button>
+        </Link>
       </div>
       {/* <p className="underline">Мы им дали: </p> */}
       <div className="flex flex-col gap-2 mt-4">
@@ -56,12 +32,12 @@ export default function Residents() {
           <div key={item.id} className="p-2 pt-6 grid grid-cols-4 ">
             <span className="absolute px-2 bg-blue-100 rounded text-blue-900 "></span>
             <div className="col-span-3">
-              <div className="pr-2">{item.name}</div>
+              <div className="pr-2">{item.resident_name}</div>
               <div className="mt-2">
                 <span className="block text-xs font-light text-slate-500">
                   Дата заезда:
                 </span>
-                <span className="text-xs">{item.intake_date}</span>
+                <span className="text-xs">{item.moving_in}</span>
               </div>
             </div>
             <div className="flex flex-col gap-2 px-2">

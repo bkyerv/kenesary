@@ -1,47 +1,48 @@
-import { Session, createClient } from "@supabase/supabase-js";
-import { FormEvent, useEffect, useState } from "react";
+import { supabase } from "./supabase/supabaseClient";
+import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
 
-export default function Auth() {
-  const [session, setSession] = useState<Session | null>(null);
+export async function action({ request, params }: ActionFunctionArgs) {
+  const formData = await request.formData();
 
-  useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-    });
-  }, []);
+  const { email, password } = Object.fromEntries(formData) as {
+    email: string;
+    password: string;
+  };
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
-    await supabase.auth.signInWithPassword({
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-    });
+  if (data) {
+    return redirect("/");
   }
 
-  const supabase = createClient(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_ANON_KEY
-  );
+  return null;
+}
 
-  return !session ? (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>email</label>
-        <input type="email" name="email" className="border rounded w-full" />
-      </div>
-      <div>
-        <label>password</label>
-        <input
-          type="password"
-          name="password"
-          className="border rounded w-full"
-        />
-      </div>
-      <button>Login</button>
-    </form>
-  ) : (
-    <pre>{JSON.stringify(session?.user, null, 2)}</pre>
+export default function Auth() {
+  return (
+    <>
+      <Form method="post">
+        <div>
+          <label>email</label>
+          <input
+            type="email"
+            name="email"
+            className="border rounded w-full px-2"
+          />
+        </div>
+        <div>
+          <label>password</label>
+          <input
+            type="password"
+            name="password"
+            className=" px-2 border rounded w-full"
+          />
+        </div>
+        <button>Login</button>
+      </Form>
+    </>
   );
 }
