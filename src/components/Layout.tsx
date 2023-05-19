@@ -8,7 +8,7 @@ export default function Layout() {
       <header className="mt-8">
         <Header />
       </header>
-      <main className="mt-4 flex-auto">
+      <main className="mt-4  flex-auto flex flex-col">
         <Outlet />
       </main>
       {/* <footer className="h-12 mb-4 border-t border-gray-200">

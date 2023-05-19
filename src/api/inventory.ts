@@ -33,3 +33,22 @@ export async function postInventory({
 export async function deleteIventory(id: string) {
   await supabase.from("inventory").delete().eq("id", id);
 }
+
+export async function editInventory(values: any) {
+  const { data, error } = await supabase
+    .from("inventory")
+    .update({
+      description: values.residentName as string,
+      given_date: values.movingIn as string,
+    })
+    .eq("id", values.id);
+
+  if (error) {
+    throw {
+      message: error.message,
+      status: 500,
+    };
+  }
+
+  return data;
+}

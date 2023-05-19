@@ -42,3 +42,38 @@ export async function addResident({
 
   return data;
 }
+
+export async function deleteResident(id: string) {
+  const { data, error } = await supabase.from("resident").delete().eq("id", id);
+  if (error) {
+    throw {
+      message: error.message,
+      status: 500,
+    };
+  }
+
+  return data;
+}
+
+export async function editResident(values: {
+  residentName: string;
+  movingIn: string;
+  id: string;
+}) {
+  const { data, error } = await supabase
+    .from("resident")
+    .update({
+      resident_name: values.residentName as string,
+      moving_in: values.movingIn as string,
+    })
+    .eq("id", values.id);
+
+  if (error) {
+    throw {
+      message: error.message,
+      status: 500,
+    };
+  }
+
+  return data;
+}

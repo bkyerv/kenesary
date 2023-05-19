@@ -6,16 +6,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Layout from "./components/Layout";
-import RoomDetails, { action } from "./room/RoomDetails";
 import Residents from "./room/Residents";
 import Transactions from "./room/Transactions";
 import Auth from "./Auth";
 import Room from "./room/Room";
 import AddNewInventory from "./room/NewInventory";
-import { loader as inventoryLoader } from "./room/RoomDetails";
+import RoomInfo, { loader as inventoryLoader } from "./room/RoomInfo";
 import { action as addInventory } from "./room/NewInventory";
-import { action as deleteInventory } from "./room/RoomDetails";
+import { action as deleteInventory } from "./room/RoomInfo";
 import { loader as residentsLoader } from "./room/Residents";
+import { action as residentAction } from "./room/Residents";
 import { action as addResident } from "./room/NewResident";
 import NewResidentForm from "./room/NewResident";
 import { requireAuth } from "./utils/requireAuth";
@@ -28,7 +28,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/login" element={<Auth />} action={loginAction} />
       <Route element={<Layout />}>
-        <Route path="/" element={<h2>main</h2>} />
+        <Route path="/" element={<h2>Сначала надо авторизоваться</h2>} />
         <Route
           path="/rooms"
           element={<Rooms />}
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
         >
           <Route
             index
-            element={<RoomDetails />}
+            element={<RoomInfo />}
             action={deleteInventory}
             loader={inventoryLoader}
           />
@@ -64,6 +64,7 @@ const router = createBrowserRouter(
             path="residents"
             element={<Residents />}
             loader={residentsLoader}
+            action={residentAction}
           />
           <Route
             path="new-resident"

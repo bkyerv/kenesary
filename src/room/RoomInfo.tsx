@@ -1,61 +1,62 @@
 import {
-  ActionFunctionArgs,
   Form,
   Link,
+  LoaderFunctionArgs,
+  Outlet,
   useLoaderData,
 } from "react-router-dom";
-import type { LoaderFunctionArgs } from "react-router-dom";
-import { deleteResident, editResident, getResidents } from "../api/resident";
+import {
+  fetchInventory,
+  deleteIventory,
+  editInventory,
+} from "../api/inventory";
 import { requireAuth } from "../utils/requireAuth";
 import { useEffect, useState } from "react";
 
-export async function action({ request, params }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const { _action, ...values } = Object.fromEntries(formData);
-  if (_action === "delete") {
-    await deleteResident(values.id as string);
-  }
-
-  if (_action === "edit") {
-    const res = await editResident(
-      values as { residentName: string; id: string; movingIn: string }
-    );
-  }
-
-  return null;
-}
-
 export async function loader({ params }: LoaderFunctionArgs) {
   await requireAuth();
-  const data = await getResidents(params.id as string);
+  const data = await fetchInventory(params.id);
   return data;
 }
 
-export default function Residents() {
-  const residents = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+type Inventories = Awaited<ReturnType<typeof loader>>;
 
+export async function action({ request, params }: LoaderFunctionArgs) {
+  const formData = await request.formData();
+  const { _action, ...values } = Object.fromEntries(formData);
+  if (_action === "delete") {
+    await deleteIventory(values.id as string);
+  }
+  if (_action === "edit") {
+    await editInventory(values);
+  }
+  return null;
+}
+
+export default function RoomInfo() {
+  const inventories = useLoaderData() as Inventories;
   const [beingEdited, setBeingEdited] = useState<string | null>(null);
   useEffect(() => {
     setBeingEdited(null);
-  }, [residents]);
+  }, [inventories]);
 
   return (
     <div className="text-sm p-4 flex-auto flex flex-col">
       <div className="text-right mt-2">
-        <Link to="../new-resident">
+        <Link to="new-inventory">
           <button className="bg-blue-500 text-blue-50 px-2 py-1 rounded">
             + Добавить
           </button>
         </Link>
       </div>
-      {residents.length === 0 ? (
+      {inventories.length === 0 ? (
         <p className="mt-16 text-sm font-light">
-          В этой комнате никто не проживает. Чтобы добавить жителя нажмите на
-          кнопку +Добавить
+          Выглядит, что мы им ничего не дали, но если дали и еще не записали, то
+          можно это сделать сейчас нажав на кнопку "+Добавить"
         </p>
       ) : (
         <div className="flex flex-col gap-2 mt-2 py-2">
-          {residents.map((item) => (
+          {inventories.map((item) => (
             <div key={item.id} className="p-2 pt-6 ">
               {item.id === beingEdited ? (
                 <div className="relative ">
@@ -66,7 +67,7 @@ export default function Residents() {
                           type="text"
                           name="residentName"
                           className=""
-                          defaultValue={item.resident_name}
+                          defaultValue={item.description}
                         />
                       </div>
                       <div className="mt-2">
@@ -77,7 +78,7 @@ export default function Residents() {
                           type="date"
                           name="movingIn"
                           className="text-xs"
-                          defaultValue={item.moving_in.substring(0, 10)}
+                          defaultValue={item.given_date.substring(0, 10)}
                         />
                       </div>
                       <input
@@ -87,12 +88,12 @@ export default function Residents() {
                         defaultValue={item.id}
                       />
                     </div>
-                    <div className="flex justify-between gap-1 ">
+                    <div className="flex items-center justify-between gap-1 ">
                       <button
                         type="submit"
                         value="edit"
                         name="_action"
-                        className="flex-auto text-md px-1 my-1 rounded"
+                        className="text-md px-1 my-1"
                       >
                         &#10003;
                       </button>
@@ -100,7 +101,7 @@ export default function Residents() {
                         onClick={() => {
                           setBeingEdited(null);
                         }}
-                        className=" flex-auto text-md px-1 my-1 rounded"
+                        className="text-md px-1 my-1"
                       >
                         &#x2715;
                       </button>
@@ -110,13 +111,13 @@ export default function Residents() {
               ) : (
                 <div className="grid grid-cols-4 ">
                   <div className="col-span-3">
-                    <div className="pr-2">{item.resident_name}</div>
+                    <div className="pr-2">{item.description}</div>
                     <div className="mt-2">
                       <span className="block text-xs font-light text-slate-500">
-                        Дата заезда:
+                        Дата выдачи:
                       </span>
                       <span className="text-xs">
-                        {item.moving_in.substring(0, 10)}
+                        {item.given_date.substring(0, 10)}
                       </span>
                     </div>
                   </div>
