@@ -38,7 +38,7 @@ export default function Header() {
           </NavLink> */}
           <NavLink
             className={({ isActive }) => (isActive ? "text-blue-500" : "")}
-            to="/"
+            to="/rooms"
           >
             Комнаты
           </NavLink>
@@ -50,10 +50,7 @@ export default function Header() {
           </NavLink> */}
 
           <button
-            onClick={() => {
-              supabase.auth.signOut();
-              return navigate("/login");
-            }}
+            onClick={() => supabase.auth.signOut().then(() => navigate("/"))}
           >
             logout
           </button>

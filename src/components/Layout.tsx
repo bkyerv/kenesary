@@ -11,9 +11,9 @@ export default function Layout() {
       <main className="mt-4 flex-auto">
         <Outlet />
       </main>
-      <footer className="h-12 mb-4 border-t border-gray-200">
+      {/* <footer className="h-12 mb-4 border-t border-gray-200">
         <Footer />
-      </footer>
+      </footer> */}
     </div>
   );
 }

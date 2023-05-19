@@ -9,7 +9,7 @@ export async function fetchInventory(id: string | undefined) {
   if (error) {
     throw {
       status: 500,
-      message: error.message,
+      message: error,
     };
   }
 

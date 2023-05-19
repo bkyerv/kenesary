@@ -25,56 +25,59 @@ let aparts = Array.from({ length: 18 }, (_, i) => i + 1);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Layout />}>
+    <>
       <Route path="/login" element={<Auth />} action={loginAction} />
-      <Route
-        path="/"
-        element={<Rooms />}
-        loader={async () => {
-          await requireAuth();
-          return null;
-        }}
-      />
-      <Route
-        path="/rooms/:id"
-        element={<Room />}
-        loader={async () => {
-          await requireAuth();
-          return null;
-        }}
-      >
+      <Route element={<Layout />}>
+        <Route path="/" element={<h2>main</h2>} />
         <Route
-          index
-          element={<RoomDetails />}
-          action={deleteInventory}
-          loader={inventoryLoader}
-        />
-        <Route
-          path="new-inventory"
-          element={<AddNewInventory />}
-          action={addInventory}
+          path="/rooms"
+          element={<Rooms />}
           loader={async () => {
             await requireAuth();
             return null;
           }}
         />
         <Route
-          path="residents"
-          element={<Residents />}
-          loader={residentsLoader}
-        />
-        <Route
-          path="new-resident"
-          element={<NewResidentForm />}
-          action={addResident}
+          path="/rooms/:id"
+          element={<Room />}
           loader={async () => {
             await requireAuth();
             return null;
           }}
-        />
-        <Route path="transactions" element={<Transactions />} />
+        >
+          <Route
+            index
+            element={<RoomDetails />}
+            action={deleteInventory}
+            loader={inventoryLoader}
+          />
+          <Route
+            path="new-inventory"
+            element={<AddNewInventory />}
+            action={addInventory}
+            loader={async () => {
+              await requireAuth();
+              return null;
+            }}
+          />
+          <Route
+            path="residents"
+            element={<Residents />}
+            loader={residentsLoader}
+          />
+          <Route
+            path="new-resident"
+            element={<NewResidentForm />}
+            action={addResident}
+            loader={async () => {
+              await requireAuth();
+              return null;
+            }}
+          />
+          <Route path="transactions" element={<Transactions />} />
+        </Route>
       </Route>
-    </Route>
+    </>
   )
 );
 
