@@ -20,6 +20,8 @@ import { action as addResident } from "./room/NewResident";
 import NewResidentForm from "./room/NewResident";
 import { requireAuth } from "./utils/requireAuth";
 import { action as loginAction } from "./Auth";
+import { action as paymentAction } from "./room/Transactions";
+import { loader as paymentLoader } from "./room/Transactions";
 
 let aparts = Array.from({ length: 18 }, (_, i) => i + 1);
 
@@ -75,7 +77,12 @@ const router = createBrowserRouter(
               return null;
             }}
           />
-          <Route path="transactions" element={<Transactions />} />
+          <Route
+            path="transactions"
+            element={<Transactions />}
+            loader={paymentLoader}
+            action={paymentAction}
+          />
         </Route>
       </Route>
     </>

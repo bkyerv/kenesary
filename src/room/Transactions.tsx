@@ -9,11 +9,37 @@ import {
   startOfToday,
   startOfYear,
 } from "date-fns";
-import { useReducer, useRef, useState } from "react";
-import { Form } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {
+  ActionFunctionArgs,
+  Form,
+  LoaderFunctionArgs,
+  useLoaderData,
+} from "react-router-dom";
+import { addTransaction, getTransactions } from "../api/transaction";
 
 function classNames(...classes: Array<string | boolean>) {
   return classes.filter(Boolean).join(" ");
+}
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const { amount, date, note, month } = Object.fromEntries(formData);
+  console.log(month);
+
+  await addTransaction(
+    amount as string,
+    date as string,
+    note as string,
+    month as string,
+    params.id as string
+  );
+  return null;
+}
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  const data = await getTransactions(params.id as string);
+  return data;
 }
 
 export default function Transactions() {
@@ -34,10 +60,18 @@ export default function Transactions() {
     }
   }
 
+  const transactions = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+  // console.log(transactions);
+  // console.log("selected month", selectedMonth);
+
+  useEffect(() => {
+    setIsEdited(false);
+  }, [transactions]);
+
   // debugger;
 
   return (
-    <div className="mt-2 px-2 text-sm flex flex-col h-[400px]">
+    <div className="mt-2 px-2 text-sm flex flex-col h-[25]vh">
       <div className="my-4 flex-auto">
         {isEdited ? (
           <div>
@@ -46,7 +80,7 @@ export default function Transactions() {
                 <label>Сумма оплаты</label>
                 <input
                   type="text"
-                  name="payment"
+                  name="amount"
                   className="border rounded py-1 "
                 />
               </div>
@@ -57,7 +91,7 @@ export default function Transactions() {
                     ref={dateRef}
                     onFocus={(e) => e.currentTarget.showPicker()}
                     type="date"
-                    name="paymentDate"
+                    name="date"
                     className="w-full rounded py-1"
                   />
                   <div
@@ -75,6 +109,12 @@ export default function Transactions() {
                   className="resize-none border rounded py-1 "
                 />
               </div>
+              <input
+                type="text"
+                name="month"
+                defaultValue={format(selectedMonth, "MMM yyyy")}
+                hidden
+              />
               <div className="text-right">
                 <button className="bg-blue-500 text-white rounded px-2 py-1">
                   сохранить
@@ -87,7 +127,12 @@ export default function Transactions() {
             <button className="text-gray-400" onClick={() => setIsEdited(true)}>
               <EditIcon />
             </button>
-            <h2 className="text-center text-xl">150</h2>
+            <h2 className="text-center text-xl">
+              {transactions
+                .filter((t) => t.month === format(selectedMonth, "MMM yyyy"))
+                .map((t) => t.amount)
+                .join("+")}
+            </h2>
           </div>
         )}
       </div>
