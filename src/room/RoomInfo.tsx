@@ -59,16 +59,25 @@ export default function RoomInfo() {
       ) : (
         <div className="flex flex-col gap-1 mt-8">
           {inventories.map((item) => (
-            <div key={item.id} className="border-l pl-2">
+            <div
+              key={item.id}
+              className={beingEdited ? "" : "border-l border-gray-300 pl-2"}
+            >
               {item.id === beingEdited ? (
                 <div className="relative ">
+                  {beingEdited && (
+                    <span className="text-xs block mb-2 text-pink-500">
+                      Режим редакитрования
+                    </span>
+                  )}
                   <Form method="post" className="grid grid-cols-4">
                     <div className="col-span-3">
                       <div>
                         <input
                           type="text"
                           name="residentName"
-                          className=""
+                          className="px-1"
+                          autoFocus
                           defaultValue={item.description}
                         />
                       </div>
@@ -95,7 +104,7 @@ export default function RoomInfo() {
                         type="submit"
                         value="edit"
                         name="_action"
-                        className="text-md px-1 my-1"
+                        className="text-md px-1 my-1 text-green-700"
                       >
                         &#10003;
                       </button>
@@ -103,7 +112,7 @@ export default function RoomInfo() {
                         onClick={() => {
                           setBeingEdited(null);
                         }}
-                        className="text-md px-1 my-1"
+                        className="text-md px-1 my-1 text-red-500"
                       >
                         &#x2715;
                       </button>

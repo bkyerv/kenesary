@@ -57,12 +57,15 @@ export default function Residents() {
       ) : (
         <div className="flex flex-col gap-2">
           {residents.map((item) => (
-            <div key={item.id} className="pl-2 border-l">
+            <div
+              key={item.id}
+              className={beingEdited ? "" : "border-l border-gray-300 pl-2"}
+            >
               {item.id === beingEdited ? (
                 <div className="relative ">
                   {beingEdited && (
-                    <span className="text-xs text-red-500">
-                      В режиме редакитрования
+                    <span className="text-xs block mb-2 text-pink-500">
+                      Режим редакитрования
                     </span>
                   )}
                   <Form method="post" className="grid grid-cols-4">
@@ -99,7 +102,7 @@ export default function Residents() {
                         type="submit"
                         value="edit"
                         name="_action"
-                        className="flex-auto text-md px-1 my-1 rounded"
+                        className="text-green-800 flex-auto text-md px-1 my-1 rounded"
                       >
                         &#10003;
                       </button>
@@ -107,7 +110,7 @@ export default function Residents() {
                         onClick={() => {
                           setBeingEdited(null);
                         }}
-                        className=" flex-auto text-md px-1 my-1 rounded"
+                        className="text-red-500 flex-auto text-md px-1 my-1 rounded"
                       >
                         &#x2715;
                       </button>
