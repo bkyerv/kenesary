@@ -54,7 +54,7 @@ export default function Residents() {
       {residents.length === 0 ? (
         <p className="mt-12 font-light">
           В этой комнате никто не проживает. Чтобы добавить жителя нажмите на
-          кнопку +Добавить
+          кнопку "+"
         </p>
       ) : (
         <div className="flex flex-col gap-2">

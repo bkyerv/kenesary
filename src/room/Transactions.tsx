@@ -118,7 +118,9 @@ export default function Transactions() {
               <div className="flex flex-col gap-1">
                 <label>Сумма оплаты</label>
                 <input
-                  type="text"
+                  type="number"
+                  pattern="[0-9]*"
+                  required
                   name="amount"
                   className="px-1 border rounded py-1 "
                 />
@@ -139,6 +141,7 @@ export default function Transactions() {
                     onFocus={(e) => e.currentTarget.showPicker()}
                     type="date"
                     name="date"
+                    required
                     className="p-1 w-full border rounded"
                   />
                   <div
