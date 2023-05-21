@@ -1,10 +1,6 @@
 import { supabase } from "../supabase/supabaseClient";
 import { requireAuth } from "../utils/requireAuth";
 
-const {
-  user: { id: userId },
-} = await requireAuth();
-
 export async function fetchInventory(id: string | undefined) {
   const { data, error } = await supabase
     .from("inventory")
@@ -31,7 +27,6 @@ export async function postInventory({
       description,
       given_date: givenDate,
       room_number: roomNumber,
-      user_id: userId,
     },
   ]);
 }
