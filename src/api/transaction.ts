@@ -5,14 +5,16 @@ export async function addTransaction(
   date: string,
   note: string,
   month: string,
+  paymentType: string,
   room_number: string
 ) {
   await supabase.from("transaction").upsert({
-    amount,
+    amount: parseInt(amount),
     note,
     date,
     month,
-    room_number,
+    payment_type: paymentType,
+    room_number: parseInt(room_number),
   });
 }
 

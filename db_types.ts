@@ -67,6 +67,38 @@ export interface Database {
           updated_at?: string
         }
       }
+      transaction: {
+        Row: {
+          amount: number
+          created_at: string
+          date: string
+          id: string
+          month: string
+          note: string | null
+          payment_type: string
+          room_number: number
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          date: string
+          id?: string
+          month: string
+          note?: string | null
+          payment_type: string
+          room_number: number
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          date?: string
+          id?: string
+          month?: string
+          note?: string | null
+          payment_type?: string
+          room_number?: number
+        }
+      }
     }
     Views: {
       [_ in never]: never
