@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export default function Layout() {
   return (
-    <div className="max-w-xs mx-auto px-2 h-screen flex flex-col text-slate-700">
+    <div className="max-w-xs mx-auto px-6 h-screen flex flex-col text-slate-700">
       <header className="mt-8">
         <Header />
       </header>

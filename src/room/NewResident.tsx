@@ -40,7 +40,7 @@ export default function NewResidentForm() {
           />
         </div>
         <div className="relative">
-          <label className="text-gray-400">Дата заезда</label>
+          <label className="text-gray-400 block">Дата заезда</label>
           <input
             type="date"
             name="movingInDate"

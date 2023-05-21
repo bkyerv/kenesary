@@ -35,7 +35,7 @@ export default function InventoryForm() {
           />
         </div>
         <div className="relative">
-          <label className="text-gray-400">Дата выдачи</label>
+          <label className="text-gray-400 block">Дата выдачи</label>
           <input
             type="date"
             name="givenDate"
