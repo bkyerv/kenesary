@@ -31,6 +31,7 @@ export default function InventoryForm() {
           <input
             type="text"
             name="description"
+            required
             className="border rounded w-full px-1 leading-9"
           />
         </div>
@@ -39,6 +40,7 @@ export default function InventoryForm() {
           <input
             type="date"
             name="givenDate"
+            required
             ref={dateRef}
             onFocus={(e) => e.currentTarget.showPicker()}
             className="border rounded w-full leading-9 px-1"

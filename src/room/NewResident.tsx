@@ -36,6 +36,7 @@ export default function NewResidentForm() {
           <input
             type="text"
             name="residentName"
+            required
             className="border rounded w-full px-1 leading-9"
           />
         </div>
@@ -44,6 +45,7 @@ export default function NewResidentForm() {
           <input
             type="date"
             name="movingInDate"
+            required
             ref={dateRef}
             onFocus={(e) => e.currentTarget.showPicker()}
             className="border rounded w-full leading-9 px-2"
