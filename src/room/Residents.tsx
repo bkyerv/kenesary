@@ -9,6 +9,8 @@ import { deleteResident, editResident, getResidents } from "../api/resident";
 import { requireAuth } from "../utils/requireAuth";
 import { useEffect, useState } from "react";
 import { AddIcon, DeleteIcon, EditIcon } from "./Transactions";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -129,7 +131,9 @@ export default function Residents() {
                         Дата заезда:
                       </span>
                       <span className="text-xs">
-                        {item.moving_in.substring(0, 10)}
+                        {format(new Date(item.moving_in), "d MMM yyyy", {
+                          locale: ru,
+                        })}
                       </span>
                     </div>
                   </div>

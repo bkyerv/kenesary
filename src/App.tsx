@@ -28,9 +28,9 @@ let aparts = Array.from({ length: 18 }, (_, i) => i + 1);
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/login" element={<Auth />} action={loginAction} />
+      <Route path="/" element={<Auth />} action={loginAction} />
       <Route element={<Layout />}>
-        <Route path="/" element={<h2>Сначала надо авторизоваться</h2>} />
+        {/* <Route path="/" element={<h2>Сначала надо авторизоваться</h2>} /> */}
         <Route
           path="/rooms"
           element={<Rooms />}
