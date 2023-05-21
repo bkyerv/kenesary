@@ -24,7 +24,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 export default function Auth() {
   return (
     <div className="max-w-xs mx-auto px-2 h-screen flex flex-col text-slate-700">
-      <div className="mt-24">
+      <div className="pt-12">
         <Link
           to=".."
           className="mb-4 block text-blue-500 underline text-sm font-light"

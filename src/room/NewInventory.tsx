@@ -6,7 +6,6 @@ import { DateIcon } from "./Transactions";
 export async function action({ request, params }: LoaderFunctionArgs) {
   const formData = await request.formData();
   const { description, givenDate } = Object.fromEntries(formData);
-  console.log(params);
   await postInventory({ description, givenDate, roomNumber: params.id });
   return redirect("/rooms/" + params.id);
 }
