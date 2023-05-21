@@ -2,7 +2,6 @@ import {
   Form,
   Link,
   LoaderFunctionArgs,
-  Outlet,
   useLoaderData,
 } from "react-router-dom";
 import {
@@ -114,7 +113,7 @@ export default function RoomInfo() {
               ) : (
                 <div className="grid grid-cols-4 ">
                   <div className="col-span-3">
-                    <div className="pr-2">{item.description}</div>
+                    <div className="">{item.description}</div>
                     <div className="mt-2">
                       <span className="block text-xs font-light text-slate-500">
                         Дата выдачи:

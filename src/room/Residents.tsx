@@ -8,6 +8,7 @@ import type { LoaderFunctionArgs } from "react-router-dom";
 import { deleteResident, editResident, getResidents } from "../api/resident";
 import { requireAuth } from "../utils/requireAuth";
 import { useEffect, useState } from "react";
+import { AddIcon, DeleteIcon, EditIcon } from "./Transactions";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -40,32 +41,38 @@ export default function Residents() {
   }, [residents]);
 
   return (
-    <div className="text-sm p-4 flex-auto flex flex-col">
-      <div className="text-right mt-2">
+    <div className="text-sm flex-auto flex flex-col ">
+      <div className="text-right">
         <Link to="../new-resident">
-          <button className="bg-blue-500 text-blue-50 px-2 py-1 rounded">
-            + Добавить
+          <button className=" text-blue-500 py-1 rounded">
+            <AddIcon />
           </button>
         </Link>
       </div>
       {residents.length === 0 ? (
-        <p className="mt-16 text-sm font-light">
+        <p className="mt-12 font-light">
           В этой комнате никто не проживает. Чтобы добавить жителя нажмите на
           кнопку +Добавить
         </p>
       ) : (
-        <div className="flex flex-col gap-2 mt-2 py-2">
+        <div className="flex flex-col gap-2">
           {residents.map((item) => (
-            <div key={item.id} className="p-2 pt-6 ">
+            <div key={item.id} className="pl-2 border-l">
               {item.id === beingEdited ? (
                 <div className="relative ">
+                  {beingEdited && (
+                    <span className="text-xs text-red-500">
+                      В режиме редакитрования
+                    </span>
+                  )}
                   <Form method="post" className="grid grid-cols-4">
                     <div className="col-span-3">
                       <div>
                         <input
                           type="text"
                           name="residentName"
-                          className=""
+                          className="px-1"
+                          autoFocus
                           defaultValue={item.resident_name}
                         />
                       </div>
@@ -110,7 +117,10 @@ export default function Residents() {
               ) : (
                 <div className="grid grid-cols-4 ">
                   <div className="col-span-3">
-                    <div className="pr-2">{item.resident_name}</div>
+                    <div className="">
+                      <span className="text-xs text-gray-400">Имя: </span>
+                      {item.resident_name}
+                    </div>
                     <div className="mt-2">
                       <span className="block text-xs font-light text-slate-500">
                         Дата заезда:
@@ -120,12 +130,12 @@ export default function Residents() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 px-2">
+                  <div className="flex items-center justify-around">
                     <button
-                      onClick={() => setBeingEdited(item.id)}
-                      className="outline outline-1 outline-blue-500 px-1 my-1  rounded"
+                      onClick={(e) => setBeingEdited(item.id)}
+                      className="text-blue-500"
                     >
-                      Edit
+                      <EditIcon />
                     </button>
                     <Form method="post">
                       <input
@@ -137,9 +147,9 @@ export default function Residents() {
                       <button
                         name="_action"
                         value="delete"
-                        className="outline outline-1 outline-blue-500 px-1 my-1 rounded"
+                        className="text-red-500"
                       >
-                        Delete
+                        <DeleteIcon />
                       </button>
                     </Form>
                   </div>
