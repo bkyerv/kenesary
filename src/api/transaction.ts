@@ -32,3 +32,19 @@ export async function getTransactions(room_number: string) {
 
   return data;
 }
+
+export async function deleteTransaction(id: string) {
+  const { data, error } = await supabase
+    .from("transaction")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    throw {
+      message: error.message,
+      status: 500,
+    };
+  }
+
+  return data;
+}
