@@ -31,8 +31,8 @@ export default function Header() {
           </NavLink>
         </div>
       ) : (
-        <div className="flex justify-between py-2">
-          {/* <NavLink
+        <div className="flex justify-between items-center py-2">
+          {/* <NavLin
             to="/"
             className={({ isActive }) => (isActive ? "text-blue-500" : "")}
           >

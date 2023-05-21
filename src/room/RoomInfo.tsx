@@ -12,6 +12,9 @@ import {
 } from "../api/inventory";
 import { requireAuth } from "../utils/requireAuth";
 import { useEffect, useState } from "react";
+import { AddIcon, DeleteIcon, EditIcon } from "./Transactions";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   await requireAuth();
@@ -41,23 +44,23 @@ export default function RoomInfo() {
   }, [inventories]);
 
   return (
-    <div className="text-sm p-4 flex-auto flex flex-col">
-      <div className="text-right mt-2">
+    <div className="text-sm flex-auto flex flex-col ">
+      <div className="text-right">
         <Link to="new-inventory">
-          <button className="bg-blue-500 text-blue-50 px-2 py-1 rounded">
-            + Добавить
+          <button className=" text-blue-500 ">
+            <AddIcon />
           </button>
         </Link>
       </div>
       {inventories.length === 0 ? (
-        <p className="mt-16 text-sm font-light">
+        <p className="mt-12 text-sm font-light">
           Выглядит, что мы им ничего не дали, но если дали и еще не записали, то
-          можно это сделать сейчас нажав на кнопку "+Добавить"
+          можно это сделать сейчас нажав на кнопку "+"
         </p>
       ) : (
-        <div className="flex flex-col gap-2 mt-2 py-2">
+        <div className="flex flex-col gap-1 mt-8">
           {inventories.map((item) => (
-            <div key={item.id} className="p-2 pt-6 ">
+            <div key={item.id} className="border-l pl-2">
               {item.id === beingEdited ? (
                 <div className="relative ">
                   <Form method="post" className="grid grid-cols-4">
@@ -117,16 +120,18 @@ export default function RoomInfo() {
                         Дата выдачи:
                       </span>
                       <span className="text-xs">
-                        {item.given_date.substring(0, 10)}
+                        {format(new Date(item.given_date), "dd MMM yyyy", {
+                          locale: ru,
+                        })}
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 px-2">
+                  <div className="flex items-center justify-around">
                     <button
                       onClick={() => setBeingEdited(item.id)}
-                      className="outline outline-1 outline-blue-500 px-1 my-1  rounded"
+                      className="text-blue-500"
                     >
-                      Edit
+                      <EditIcon />
                     </button>
                     <Form method="post">
                       <input
@@ -138,9 +143,9 @@ export default function RoomInfo() {
                       <button
                         name="_action"
                         value="delete"
-                        className="outline outline-1 outline-blue-500 px-1 my-1 rounded"
+                        className="text-red-500"
                       >
-                        Delete
+                        <DeleteIcon />
                       </button>
                     </Form>
                   </div>

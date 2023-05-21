@@ -139,7 +139,7 @@ export default function Transactions() {
                     onFocus={(e) => e.currentTarget.showPicker()}
                     type="date"
                     name="date"
-                    className="px-1 w-full py-1 border rounded"
+                    className="p-1 w-full border rounded"
                   />
                   <div
                     onClick={showDatePicker}
@@ -176,7 +176,7 @@ export default function Transactions() {
         ) : (
           <div className="text-right min-h-[100px]">
             <button className="text-blue-400" onClick={() => setIsEdited(true)}>
-              <AddPaymentIcon />
+              <AddIcon />
             </button>
             <div className=" text-left">
               <p className="mb-2">
@@ -250,7 +250,7 @@ export default function Transactions() {
   );
 }
 
-function AddPaymentIcon() {
+export function AddIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -260,22 +260,17 @@ function AddPaymentIcon() {
     >
       <path
         fill="currentColor"
-        d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"
+        d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8Z"
       />
       <path
         fill="currentColor"
-        fillOpacity=".15"
-        d="M184 840h656V184H184v656zm136-352c0-4.4 3.6-8 8-8h152V328c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v152h152c4.4 0 8 3.6 8 8v48c0 4.4-3.6 8-8 8H544v152c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V544H328c-4.4 0-8-3.6-8-8v-48z"
-      />
-      <path
-        fill="currentColor"
-        d="M328 544h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+        d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8Z"
       />
     </svg>
   );
 }
 
-function DateIcon() {
+export function DateIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -324,7 +319,7 @@ function LeftArrow() {
   );
 }
 
-function EditIcon() {
+export function EditIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -340,7 +335,7 @@ function EditIcon() {
   );
 }
 
-function DeleteIcon() {
+export function DeleteIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

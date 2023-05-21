@@ -4,6 +4,7 @@ export default function Room() {
   const params = useParams();
   return (
     <>
+      <h2 className="text-3xl font-bold">Комната №{params.id}</h2>
       <nav className="flex gap-2 py-4 text-sm text-blue-500">
         <NavLink
           to="."
@@ -25,7 +26,6 @@ export default function Room() {
           Платежи
         </NavLink>
       </nav>
-      <h2 className="text-3xl font-bold">Комната №{params.id}</h2>
       <Outlet />
     </>
   );
