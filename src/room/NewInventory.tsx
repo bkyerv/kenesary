@@ -1,4 +1,4 @@
-import { Form, Link, LoaderFunctionArgs, redirect } from "react-router-dom";
+import { Form, LoaderFunctionArgs, redirect } from "react-router-dom";
 import { postInventory } from "../api/inventory";
 import { useRef } from "react";
 import { DateIcon } from "./Transactions";
