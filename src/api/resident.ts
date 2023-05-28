@@ -45,6 +45,7 @@ export async function addResident({
 
 export async function deleteResident(id: string) {
   const { data, error } = await supabase.from("resident").delete().eq("id", id);
+
   if (error) {
     throw {
       message: error.message,
