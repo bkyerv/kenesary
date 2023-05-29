@@ -11,7 +11,7 @@ export default function Room() {
           end
           className={({ isActive }) => (isActive ? "underline" : "")}
         >
-          Главная
+          Платежи
         </NavLink>
         <NavLink
           to="residents"
@@ -20,10 +20,10 @@ export default function Room() {
           Жители
         </NavLink>
         <NavLink
-          to="transactions"
+          to="info"
           className={({ isActive }) => (isActive ? "underline" : "")}
         >
-          Платежи
+          Общая информация
         </NavLink>
       </nav>
       <Outlet />

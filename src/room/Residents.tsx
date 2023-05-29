@@ -46,8 +46,9 @@ export default function Residents() {
     <div className="text-sm flex-auto flex flex-col ">
       <div className="text-right">
         <Link to="../new-resident">
-          <button className=" text-blue-500 py-1 rounded">
-            <AddIcon />
+          <button className="inline-flex p-1 bg-slate-600 text-slate-50 items-center text-xs rounded">
+            <AddIcon w="16" h="16" />
+            <span>жителя</span>
           </button>
         </Link>
       </div>

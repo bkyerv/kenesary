@@ -49,9 +49,9 @@ const router = createBrowserRouter(
         >
           <Route
             index
-            element={<RoomInfo />}
-            action={deleteInventory}
-            loader={inventoryLoader}
+            element={<Transactions />}
+            loader={paymentLoader}
+            action={paymentAction}
           />
           <Route
             path="new-inventory"
@@ -78,10 +78,10 @@ const router = createBrowserRouter(
             }}
           />
           <Route
-            path="transactions"
-            element={<Transactions />}
-            loader={paymentLoader}
-            action={paymentAction}
+            path="info"
+            element={<RoomInfo />}
+            action={deleteInventory}
+            loader={inventoryLoader}
           />
         </Route>
       </Route>

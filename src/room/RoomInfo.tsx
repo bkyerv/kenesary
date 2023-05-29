@@ -46,8 +46,9 @@ export default function RoomInfo() {
     <div className="text-sm flex-auto flex flex-col ">
       <div className="text-right">
         <Link to="new-inventory">
-          <button className=" text-blue-500 ">
-            <AddIcon />
+          <button className="inline-flex p-1 rounded bg-slate-600 text-slate-50 text-sm self-end items-center">
+            <AddIcon w="16" h="16" />
+            <span>инвентарь</span>
           </button>
         </Link>
       </div>
