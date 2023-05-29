@@ -1,5 +1,4 @@
 import { supabase } from "../supabase/supabaseClient";
-import { requireAuth } from "../utils/requireAuth";
 
 export async function fetchInventory(id: string | undefined) {
   const { data, error } = await supabase

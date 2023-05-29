@@ -25,12 +25,12 @@ export default function Auth() {
   return (
     <div className="max-w-xs mx-auto px-2 h-screen flex flex-col text-slate-700">
       <div className="pt-12">
-        <Link
+        {/* <Link
           to=".."
           className="mb-4 block text-blue-500 underline text-sm font-light"
         >
           Назад на главную
-        </Link>
+        </Link> */}
         <Form method="post" className=" px-8 border py-4 flex flex-col gap-4">
           <div>
             <label>email</label>

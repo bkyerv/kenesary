@@ -48,3 +48,12 @@ export async function deleteTransaction(id: string) {
 
   return data;
 }
+
+export async function markMonthAsSettled(room_number: string, month: string) {
+  await supabase.from("debt").insert([
+    {
+      room_number: parseInt(room_number),
+      settled_period: month,
+    },
+  ]);
+}

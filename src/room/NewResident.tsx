@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, Form, Link, redirect } from "react-router-dom";
 import { addResident } from "../api/resident";
 import { useRef } from "react";
-import { DateIcon } from "./Transactions";
+import { DateIcon } from "../components/icons/icons";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();

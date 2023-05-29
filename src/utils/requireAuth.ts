@@ -7,7 +7,7 @@ export async function requireAuth() {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    throw redirect("/login");
+    throw redirect("/");
   }
   return session;
 }

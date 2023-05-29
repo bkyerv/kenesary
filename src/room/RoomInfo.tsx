@@ -11,7 +11,7 @@ import {
 } from "../api/inventory";
 import { requireAuth } from "../utils/requireAuth";
 import { useEffect, useState } from "react";
-import { AddIcon, DeleteIcon, EditIcon } from "./Transactions";
+import { AddIcon, DeleteIcon, EditIcon } from "../components/icons/icons";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 
@@ -57,14 +57,14 @@ export default function RoomInfo() {
           можно это сделать сейчас нажав на кнопку "+"
         </p>
       ) : (
-        <div className="flex flex-col gap-1 mt-8">
+        <div className="flex flex-col gap-4 mt-8">
           {inventories.map((item) => (
             <div
               key={item.id}
-              className={beingEdited ? "" : "border-l border-gray-300 pl-2"}
+              className={beingEdited ? "" : "p-1 border-b border-gray-100 pl-2"}
             >
               {item.id === beingEdited ? (
-                <div className="relative ">
+                <div className="relative border p-1 border-pink-500">
                   {beingEdited && (
                     <span className="text-xs block mb-2 text-pink-500">
                       Режим редакитрования
@@ -83,7 +83,7 @@ export default function RoomInfo() {
                       </div>
                       <div className="mt-2">
                         <label className="block text-xs font-light text-slate-500">
-                          Дата заезда
+                          Дата выдачи
                         </label>
                         <input
                           type="date"

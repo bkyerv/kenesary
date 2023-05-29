@@ -9,6 +9,26 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      debt: {
+        Row: {
+          created_at: string | null
+          id: number
+          room_number: number
+          settled_period: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          room_number: number
+          settled_period: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          room_number?: number
+          settled_period?: string
+        }
+      }
       inventory: {
         Row: {
           created_at: string
@@ -41,6 +61,7 @@ export interface Database {
           id: string
           moving_in: string
           moving_out: string | null
+          nid: string | null
           resident_name: string
           room_number: number
           still_lives: boolean
@@ -51,6 +72,7 @@ export interface Database {
           id?: string
           moving_in: string
           moving_out?: string | null
+          nid?: string | null
           resident_name: string
           room_number: number
           still_lives?: boolean
@@ -61,10 +83,28 @@ export interface Database {
           id?: string
           moving_in?: string
           moving_out?: string | null
+          nid?: string | null
           resident_name?: string
           room_number?: number
           still_lives?: boolean
           updated_at?: string
+        }
+      }
+      room: {
+        Row: {
+          created_at: string | null
+          id: number
+          number: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          number: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          number?: number
         }
       }
       transaction: {

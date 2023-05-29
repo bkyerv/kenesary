@@ -8,7 +8,7 @@ import type { LoaderFunctionArgs } from "react-router-dom";
 import { deleteResident, editResident, getResidents } from "../api/resident";
 import { requireAuth } from "../utils/requireAuth";
 import { useEffect, useState } from "react";
-import { AddIcon, DeleteIcon, EditIcon } from "./Transactions";
+import { AddIcon, DeleteIcon, EditIcon } from "../components/icons/icons";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 

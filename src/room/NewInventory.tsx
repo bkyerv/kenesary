@@ -1,7 +1,7 @@
 import { Form, Link, LoaderFunctionArgs, redirect } from "react-router-dom";
 import { postInventory } from "../api/inventory";
 import { useRef } from "react";
-import { DateIcon } from "./Transactions";
+import { DateIcon } from "../components/icons/icons";
 
 export async function action({ request, params }: LoaderFunctionArgs) {
   const formData = await request.formData();
